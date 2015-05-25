@@ -1,11 +1,3 @@
-[user]
-    name = David Bagonyi
-    email = david.bagonyi@gmail.com
-
-[github]
-    user = bagonyi
-    token = _TOKEN_
-
 [core]
     excludesfile = ~/.gitignore_global
     autocrlf = input
@@ -18,3 +10,6 @@
 
 [push]
     default = matching
+
+[include]
+  path = ~/.gitconfig.local

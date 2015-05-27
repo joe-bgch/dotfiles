@@ -14,7 +14,7 @@ if [ -d "$ZSH" ]; then
     # Would you like to use another custom folder than $ZSH/custom?
     # ZSH_CUSTOM=/path/to/new-custom-folder
 
-    plugins=(git)
+    plugins=(git autojump zsh-syntax-highlighting docker)
 
     source ${ZSH}/oh-my-zsh.sh
 fi

@@ -1,5 +1,3 @@
-" Make sure Vundle is installed: git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
 " Vundle
 set nocompatible
 filetype off

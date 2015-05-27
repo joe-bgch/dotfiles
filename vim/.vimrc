@@ -1,5 +1,6 @@
-" Vundle
+" Make sure Vundle is installed: git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+" Vundle
 set nocompatible
 filetype off
 
@@ -18,9 +19,13 @@ Plugin 'sh.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/nerdtree'
+Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+" General settings
 
 " Enable 256 colors
 set t_Co=256
@@ -43,22 +48,33 @@ set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 
-set whichwrap+=<,>,h,l,[,]
-set expandtab
-set shiftwidth=4
-set softtabstop=4
+" Allow saving of files as sudo
+cmap w!! w !sudo tee > /dev/null %
+cnoremap sudow w !sudo tee % >/dev/null
 
-" vim-airline
-let g:airline#extensions#tabline#enabled = 1
-set laststatus=2
+" Don't show mode indicator (the airline provided one is enough)
 set noshowmode
-set ambiwidth=double
-let g:airline_theme = 'powerlineish'
-let g:airline_powerline_fonts = 1
+
+" Faster UI updates
+set updatetime=750
 
 " Turn on smart indenting
 filetype indent on
 set smartindent
+
+set whichwrap+=<,>,h,l,[,]
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set ambiwidth=double
+
+" Plugin settings
+
+" vim-airline
+let g:airline#extensions#tabline#enabled = 1
+set laststatus=2
+let g:airline_theme = 'powerlineish'
+let g:airline_powerline_fonts = 1
 
 " Syntastic settings
 set statusline+=%#warningmsg#

@@ -10,20 +10,23 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'joonty/vdebug'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'ColorSchemeMenuMaker'
-Plugin 'desert-warm-256'
 Plugin 'bling/vim-airline'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'sh.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+" Enable 256 colors
 set t_Co=256
-colorscheme monokai
+
+" Set colorscheme
+colorscheme elda
 
 " Highlight current line
 set cursorline
@@ -33,6 +36,12 @@ set number
 
 " Syntax highlight
 syntax on
+
+" Change backup / swap / undo directories. Make sure to create these directories first
+" The // suffix is to avoid filename collisions when editing files with same name
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
 
 set whichwrap+=<,>,h,l,[,]
 set expandtab
@@ -60,3 +69,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" Tagbar
+nmap <F8> :TagbarToggle<CR>

@@ -30,3 +30,7 @@ function extract {
     fi
     fi
 }
+
+function work_log {
+  for i in *; do [ -d "$i/.git" ] && (cd $i; git log --date=short --pretty=format:"%ad $i %s" --author="$(git config --get user.email)") 2> /dev/null; done | sort | tac
+}

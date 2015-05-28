@@ -1,15 +1,20 @@
 [core]
     excludesfile = ~/.gitignore_global
-    autocrlf = input
-    trustctime = false
-    ignorecase = false
     editor = vim
 
 [color]
     ui = true
 
+[alias]
+    st = status -sb
+    ci = commit
+    br = branch -vv
+    co = checkout
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    cp = cherry-pick
+
 [push]
-    default = matching
+    default = upstream
 
 [include]
-  path = ~/.gitconfig.local
+    path = ~/.gitconfig.local

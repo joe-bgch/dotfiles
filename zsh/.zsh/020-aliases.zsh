@@ -1,6 +1,6 @@
 alias ..='cd ..'
 alias ...='cd ../../'
-alias ll='ls -alh'
+alias ll='ls -alhp --group-directories-first'
 alias l='ll'
 alias dog='pygmentize -g'
 alias externalip='curl ifconfig.me'

@@ -1,3 +1,4 @@
+alias sudo='sudo '
 alias ..='cd ..'
 alias ...='cd ../../'
 alias ll='ls -alhp --group-directories-first'

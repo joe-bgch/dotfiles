@@ -6,6 +6,9 @@
     ui = true
 
 [alias]
+    unpushed = "log --branches --not --remotes  --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset  %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit"
+    ec = config --global -e
+    contains = "!f() { echo 'Branches'; git branch --all --contains ${1-HEAD}; echo 'Tags'; git tag --contains ${1-HEAD}; }; f"
     st = status -sb
     ci = commit
     br = branch -vv
@@ -18,3 +21,6 @@
 
 [include]
     path = ~/.gitconfig.local
+
+[credential]
+    helper = cache --timeout=3600

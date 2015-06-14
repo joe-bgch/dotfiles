@@ -40,3 +40,12 @@ _fancy-ctrl-z () {
 
 zle -N fancy-ctrl-z _fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
+
+# Ctrl+Q to kill processes
+_fzf-kill () {
+    zle -I;
+    ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -${1:-9};
+}
+
+zle -N fzf-kill _fzf-kill
+bindkey '^Q' fzf-kill

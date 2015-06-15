@@ -34,3 +34,12 @@ function extract {
 function work_log {
   for i in *; do [ -d "$i/.git" ] && (cd $i; git log --date=short --pretty=format:"%ad $i %s" --author="$(git config --get user.email)") 2> /dev/null; done | sort | tac
 }
+
+# fbr - checkout git branch
+# http://junegunn.kr/2015/03/fzf-tmux/
+function fbr {
+  local branches branch
+  branches=$(git branch) &&
+  branch=$(echo "$branches" | fzf-tmux -d 15 +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //")
+}

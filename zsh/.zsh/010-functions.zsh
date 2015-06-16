@@ -43,3 +43,11 @@ function fbr {
   branch=$(echo "$branches" | fzf-tmux -d 15 +m) &&
   git checkout $(echo "$branch" | sed "s/.* //")
 }
+
+# ftag - checkout git tag
+function ftag {
+  local tags tag
+  tags=$(git tag) &&
+  tag=$(echo "$tags" | fzf-tmux -d 15 +m) &&
+  git checkout $(echo "$tag")
+}

@@ -63,3 +63,7 @@ mkcd () {
     *) mkdir -p "./$1" && cd "./$1";;
   esac
 }
+
+command_exists () {
+  type "$1" &> /dev/null ;
+}

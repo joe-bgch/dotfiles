@@ -60,6 +60,8 @@ set noshowmode
 " Faster UI updates
 set updatetime=750
 
+set timeoutlen=1000 ttimeoutlen=0
+
 " Turn on smart indenting
 filetype indent on
 set smartindent

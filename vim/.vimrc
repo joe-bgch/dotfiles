@@ -41,8 +41,8 @@ set number
 syntax on
 
 " Ctrl+S to save file
-:nmap <c-s> :w<CR>
-:imap <c-s> <Esc>:w<CR>a
+nmap <c-s> :w<CR>
+imap <c-s> <Esc>:w<CR>a
 
 " Change backup / swap / undo directories. Make sure to create these directories first
 " The // suffix is to avoid filename collisions when editing files with same name

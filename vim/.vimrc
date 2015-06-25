@@ -71,6 +71,8 @@ nnoremap <Leader>n :CtrlP<CR>
 nnoremap <Leader>w :w<CR>
 
 set ignorecase            " Make searches case-insensitive.
+set incsearch             " show match as search proceeds
+set hlsearch              " search highlighting
 set tabstop=4             " tab spacing
 set softtabstop=4         " unify
 set shiftwidth=4          " indent/outdent by 4 columns

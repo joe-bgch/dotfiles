@@ -58,3 +58,12 @@ _fzf-change-to-recent-dir () {
 
 zle -N fzf-change-to-recent-dir _fzf-change-to-recent-dir
 bindkey '^[o' fzf-change-to-recent-dir
+
+# Alt+E to edit recent file
+_fzf-edit-recent-file () {
+    fasd -fl | fzf | xargs -o $EDITOR
+    zle && zle accept-line
+}
+
+zle -N fzf-edit-recent-file _fzf-edit-recent-file
+bindkey '^[e' fzf-edit-recent-file

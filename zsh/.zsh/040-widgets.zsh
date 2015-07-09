@@ -49,3 +49,12 @@ _fzf-kill () {
 
 zle -N fzf-kill _fzf-kill
 bindkey '^Q' fzf-kill
+
+# Alt+O to change to recent dir
+_fzf-change-to-recent-dir () {
+    cd $(fasd -dl | fzf)
+    zle && zle accept-line
+}
+
+zle -N fzf-change-to-recent-dir _fzf-change-to-recent-dir
+bindkey '^[o' fzf-change-to-recent-dir

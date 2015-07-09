@@ -12,3 +12,4 @@ alias v='f -e vim'
 alias c='fasd_cd -d'
 alias tmux='tmux -2'
 alias lsr='ls -d -1 $PWD/**/*'
+alias j=z

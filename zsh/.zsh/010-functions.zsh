@@ -67,3 +67,16 @@ mkcd () {
 command_exists () {
   type "$1" &> /dev/null ;
 }
+
+phpinfo () {
+  TMPDIR=/tmp/phpinfo-$[ 10000 + $[ RANDOM % 99999 ]]
+  TMPFILE=$TMPDIR/index.php
+  mkdir $TMPDIR
+  echo '<?php phpinfo();' >> $TMPFILE
+  php -S localhost:4444 -t $TMPDIR &
+  PHPPID=$!
+  open http://localhost:4444
+  sleep 5
+  kill $PHPPID
+  rm -rf $TMPDIR
+}

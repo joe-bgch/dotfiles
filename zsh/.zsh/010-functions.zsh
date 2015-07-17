@@ -71,11 +71,20 @@ command_exists () {
 phpinfo () {
   TMPDIR=/tmp/phpinfo-$[ 10000 + $[ RANDOM % 99999 ]]
   TMPFILE=$TMPDIR/index.php
+  PORT=4444
   mkdir $TMPDIR
   echo '<?php phpinfo();' >> $TMPFILE
-  php -S localhost:4444 -t $TMPDIR &
+  php -S localhost:$PORT -t $TMPDIR &
   PHPPID=$!
-  open http://localhost:4444
+  URL=http://localhost:$PORT
+
+  if command_exists xdg-open
+  then
+    xdg-open $URL
+  else
+    open $URL
+  fi
+
   sleep 5
   kill $PHPPID
   rm -rf $TMPDIR

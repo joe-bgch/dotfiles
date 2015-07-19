@@ -89,3 +89,18 @@ phpinfo () {
   kill $PHPPID
   rm -rf $TMPDIR
 }
+
+servephp () {
+  HOST=localhost
+  PORT=4444
+  URL=http://$HOST:$PORT
+
+  if command_exists xdg-open
+  then
+    ( sleep 1 ; xdg-open $URL ) &
+  else
+    ( sleep 1 ; open $URL ) &
+  fi
+
+  php -S $HOST:$PORT
+}

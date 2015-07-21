@@ -91,8 +91,14 @@ phpinfo () {
 }
 
 servephp () {
-  HOST=localhost
   PORT=4444
+
+  if [ $# -eq 1 ]
+    then
+      PORT=$1
+  fi
+
+  HOST=localhost
   URL=http://$HOST:$PORT
 
   if command_exists xdg-open

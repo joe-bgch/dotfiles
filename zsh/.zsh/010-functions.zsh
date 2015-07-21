@@ -92,10 +92,16 @@ phpinfo () {
 
 servephp () {
   PORT=4444
+  PREFIX=''
 
   if [ $# -eq 1 ]
+  then
+    PORT=$1
+
+    if [ $PORT -le 1024 ]
     then
-      PORT=$1
+      PREFIX='sudo'
+    fi
   fi
 
   HOST=localhost
@@ -108,5 +114,7 @@ servephp () {
     ( sleep 1 ; open $URL ) &
   fi
 
-  php -S $HOST:$PORT
+  echo "Executing$PREFIX php -S $HOST:$PORT"
+
+  $PREFIX php -S $HOST:$PORT
 }

@@ -114,3 +114,7 @@ let g:syntastic_check_on_wq = 0
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
+
+" CtrlP
+nmap <leader>b :CtrlPBuffer<CR>
+

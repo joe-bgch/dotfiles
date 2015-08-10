@@ -118,3 +118,14 @@ servephp () {
 
   $PREFIX php -S $HOST:$PORT
 }
+
+venv_activate () {
+  DIR=venv
+
+  if [ $# -eq 1 ]
+  then
+    DIR=$1
+  fi
+
+  source $DIR/bin/activate
+}

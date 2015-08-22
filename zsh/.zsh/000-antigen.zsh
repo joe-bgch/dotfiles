@@ -8,6 +8,7 @@ antigen bundle boot2docker
 antigen bundle httpie
 antigen bundle macports
 antigen bundle pip
+antigen bundle dirhistory
 
 antigen theme ys
 

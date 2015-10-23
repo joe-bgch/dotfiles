@@ -1,4 +1,30 @@
+# aliases
 alias ..='cd ..'
 alias ...='cd ../../'
 alias ll='ls -alhp --group-directories-first'
 alias l='ll'
+alias cls="printf '\n%.0s' {1..80}"
+
+# functions
+command_exists () {
+  type "$1" &> /dev/null ;
+}
+
+# tmux
+export TMUX_CONFIG=$SSHHOME/.sshrc.d/.tmux.conf
+export TMUX_VERSION_MAJOR=$(tmux -V | cut -d' ' -f2 | cut -d'.' -f1 | sed 's/[^0-9]*//g')
+export TMUX_VERSION_MINOR=$(tmux -V | cut -d' ' -f2 | cut -d'.' -f2 | sed 's/[^0-9]*//g')
+alias tmux='tmux -2 -f $TMUX_CONFIG'
+
+# screen
+export SCREENRC=$SSHHOME/.sshrc.d/.screenrc
+
+# vim
+alias vim='vim -u $SSHHOME/.sshrc.d/.vimrc'
+
+# display basic information after login
+echo uptime: $(uptime)
+command_exists vim && echo vim: $(vim --version | head -1) || echo vim not installed
+command_exists tmux && echo tmux: $(tmux -V) || echo tmux not installed
+command_exists screen && echo screen: $(screen --version) || echo screen not installed
+command_exists lnav && echo lnav: $(lnav -V) || echo lnav not installed

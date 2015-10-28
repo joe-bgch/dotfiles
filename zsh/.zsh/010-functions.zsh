@@ -129,3 +129,34 @@ venv_activate () {
 
   source $DIR/bin/activate
 }
+
+# http://chneukirchen.org/blog/category/zsh.html
+#
+# cdup: move up the directory stack either a numeric amount or to a
+# directory with the required prefix.
+#
+# With this helper function, you
+# can do a lot more actually: Say you are in ~/src/zsh/Src/Builtins
+# and want to go to ~/src/zsh. Just say up zsh. Or even just up z.
+#
+# And as a bonus, if you capture the output of up, it will print the
+# directory you want, and not change to it. So you can do:
+#
+# mv foo.c $(up zsh)
+cdup () {
+  local op=print
+  [[ -t 1 ]] && op=cd # The test [[ -t 1 ]] checks whether stdout is a terminal
+  case "$1" in
+    '') cdup 1;;
+    -*|+*) $op ~$1;;
+    <->) $op $(printf '../%.0s' {1..$1});;
+    *) local -a seg; seg=(${(s:/:)PWD%/*})
+       local n=${(j:/:)seg[1,(I)$1*]}
+       if [[ -n $n ]]; then
+         $op /$n
+       else
+         print -u2 cdup: could not find prefix $1 in $PWD
+         return 1
+       fi
+  esac
+}

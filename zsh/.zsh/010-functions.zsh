@@ -39,7 +39,7 @@ function work_log {
 # http://junegunn.kr/2015/03/fzf-tmux/
 function fbr {
   local branches branch
-  branches=$(git branch) &&
+  branches=$(git branch -a) &&
   branch=$(echo "$branches" | fzf-tmux -d 15 +m) &&
   git checkout $(echo "$branch" | sed "s/.* //")
 }

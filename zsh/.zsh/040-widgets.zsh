@@ -17,15 +17,15 @@ function _insert_sudo {
 zle -N insert-sudo _insert_sudo
 bindkey "^[s" insert-sudo
 
-# Alt+R to source .zshrc
-_source_zshrc () {
-    echo 'Sourcing ~/.zshrc'
-    source $HOME/.zshrc
+# Alt+R to source .zshrc & .zshenv
+_source_zsh_config () {
+    [ -f $HOME/.zshrc ] && echo 'Sourcing ~/.zshrc' && source $HOME/.zshrc
+    [ -f $HOME/.zshenv ] && echo 'Sourcing ~/.zshenv' && source $HOME/.zshenv
     zle && zle accept-line
 }
 
-zle -N source-zshrc _source_zshrc
-bindkey "^[r" source-zshrc
+zle -N source-zsh-config _source_zsh_config
+bindkey "^[r" source-zsh-config
 
 # Ctrl+Z to fg
 _fancy-ctrl-z () {

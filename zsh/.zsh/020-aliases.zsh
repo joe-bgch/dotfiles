@@ -13,3 +13,4 @@ alias c='fasd_cd -d'
 alias tmux='tmux -2'
 alias lsr='ls -d -1 $PWD/**/*'
 alias j=z
+alias grep='grep --ignore-case --color'

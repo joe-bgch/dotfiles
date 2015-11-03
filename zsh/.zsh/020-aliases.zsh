@@ -14,3 +14,5 @@ alias tmux='tmux -2'
 alias lsr='ls -d -1 $PWD/**/*'
 alias j=z
 alias grep='grep --ignore-case --color'
+alias gr='gradle'
+alias gw='./gradlew'

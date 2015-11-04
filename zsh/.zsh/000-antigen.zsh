@@ -9,6 +9,7 @@ antigen bundle httpie
 antigen bundle macports
 antigen bundle pip
 antigen bundle dirhistory
+antigen bundle micha/resty
 
 antigen theme ys
 

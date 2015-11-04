@@ -7,4 +7,6 @@ export RPROMPT='[%?]'
 
 command -v most >/dev/null 2>&1 && export PAGER='most'
 
+WORDCHARS=${WORDCHARS//[=&.;]}
+
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local

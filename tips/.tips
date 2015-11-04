@@ -1,2 +1,3 @@
 Use git icdiff for showing colorful side by side diffs
 Use resty for consuming REST APIs easily. Usage:\n\n$ resty http://localhost:8080\n\n$ GET /people
+Use tmpdir to create a temporary directory for the current session

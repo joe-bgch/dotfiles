@@ -1,3 +1,6 @@
 Use git icdiff for showing colorful side by side diffs
 Use resty for consuming REST APIs easily. Usage:\n\n$ resty http://localhost:8080\n\n$ GET /people
 Use tmpdir to create a temporary directory for the current session
+Use Ctrl-x-e to edit current command in EDITOR
+Use fc to edit previous command in EDITOR and then execute it
+Type partial command, kill this command, check something you forgot, yank the command, resume typing.\n\n<Ctrl+u> [...] <Ctrl+y>

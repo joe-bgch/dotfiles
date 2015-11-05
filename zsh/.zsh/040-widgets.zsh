@@ -61,7 +61,12 @@ bindkey '^[o' fzf-change-to-recent-dir
 
 # Alt+E to edit recent file
 _fzf-edit-recent-file () {
-    fasd -fl | fzf | xargs bash -c '</dev/tty vim "$@"' ignoreme
+    file=$(fasd -fl | fzf)
+    if [[ -f ${file} ]]
+    then
+        echo ${file} | xargs bash -c '</dev/tty vim "$@"' ignoreme
+    fi
+
     zle && zle accept-line
 }
 

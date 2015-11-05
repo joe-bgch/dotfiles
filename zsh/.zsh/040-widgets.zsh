@@ -52,7 +52,7 @@ bindkey '^Q' fzf-kill
 
 # Alt+O to change to recent dir
 _fzf-change-to-recent-dir () {
-    cd $(fasd -dl | fzf)
+    cd $(fasd -dlR | fzf)
     zle && zle accept-line
 }
 

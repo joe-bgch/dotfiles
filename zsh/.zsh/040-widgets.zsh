@@ -73,7 +73,7 @@ _fzf-edit-recent-file () {
 zle -N fzf-edit-recent-file _fzf-edit-recent-file
 bindkey '^[e' fzf-edit-recent-file
 
-# Ctrl+E to print environment and pipe it into fzf
+# Alt+. to print environment and pipe it into fzf
 _fzf-print-environment () {
     printenv | sort -fr | fzf
 
@@ -81,4 +81,4 @@ _fzf-print-environment () {
 }
 
 zle -N fzf-print-environment _fzf-print-environment
-bindkey '^e' fzf-print-environment
+bindkey '^[.' fzf-print-environment

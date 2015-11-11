@@ -44,7 +44,7 @@ bindkey '^Z' fancy-ctrl-z
 # Ctrl+Q to kill processes
 _fzf-kill () {
     zle -I;
-    ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -${1:-9};
+    ps -ef | sed 1d | fzf -m -x | awk '{print $2}' | xargs kill -${1:-9};
 }
 
 zle -N fzf-kill _fzf-kill
@@ -52,7 +52,7 @@ bindkey '^Q' fzf-kill
 
 # Alt+O to change to recent dir
 _fzf-change-to-recent-dir () {
-    cd $(fasd -dlR | fzf)
+    cd $(fasd -dlR | fzf -x)
     zle && zle accept-line
 }
 
@@ -61,7 +61,7 @@ bindkey '^[o' fzf-change-to-recent-dir
 
 # Alt+E to edit recent file
 _fzf-edit-recent-file () {
-    file=$(fasd -fl | fzf)
+    file=$(fasd -fl | fzf -x)
     if [[ -f ${file} ]]
     then
         echo ${file} | xargs bash -c '</dev/tty vim "$@"' ignoreme
@@ -75,7 +75,7 @@ bindkey '^[e' fzf-edit-recent-file
 
 # Alt+. to print environment and pipe it into fzf
 _fzf-print-environment () {
-    printenv | sort -fr | fzf
+    printenv | sort -fr | fzf -x
 
     zle && zle accept-line
 }

@@ -16,3 +16,4 @@ alias j=z
 alias grep='grep --ignore-case --color'
 alias gr='gradle'
 alias gw='./gradlew'
+alias fzfl='locate / | fzf -x'

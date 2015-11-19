@@ -160,3 +160,14 @@ bd () {
        fi
   esac
 }
+
+# Fix SSH agent in reattached tmux session shells
+# https://coderwall.com/p/_s_xda/fix-ssh-agent-in-reattached-tmux-session-shells
+fix-ssh() {
+  for key in SSH_AUTH_SOCK SSH_CONNECTION SSH_CLIENT; do
+    if (tmux show-environment | grep "^${key}" > /dev/null); then
+      value=`tmux show-environment | grep "^${key}" | sed -e "s/^[A-Z_]*=//"`
+      export ${key}="${value}"
+    fi
+  done
+}

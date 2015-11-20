@@ -10,6 +10,7 @@ antigen bundle macports
 antigen bundle pip
 antigen bundle dirhistory
 antigen bundle micha/resty
+antigen bundle jamesob/desk shell_plugins/zsh
 
 antigen theme ys
 

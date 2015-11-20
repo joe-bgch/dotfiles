@@ -3,8 +3,15 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/opt/loca
 export EDITOR=vim
 export VISUAL=vim
 
+# Display last exit code on the right
 export RPROMPT='[%?]'
 
 WORDCHARS=${WORDCHARS//[=&.;]}
+
+# Don't let > overwrite an existing file
+# cat > foo #=> Zsh: file exists: foo
+# To override file use >| instead of >
+# cat >| foo #=> OK
+setopt NOCLOBBER
 
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local

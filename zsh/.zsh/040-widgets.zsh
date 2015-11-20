@@ -88,3 +88,8 @@ _fzf-print-environment () {
 
 zle -N fzf-print-environment _fzf-print-environment
 bindkey '^[.' fzf-print-environment
+
+# Ctrl+F to edit current line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^f' edit-command-line

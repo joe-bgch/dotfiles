@@ -8,10 +8,4 @@ export RPROMPT='[%?]'
 
 WORDCHARS=${WORDCHARS//[=&.;]}
 
-# Don't let > overwrite an existing file
-# cat > foo #=> Zsh: file exists: foo
-# To override file use >| instead of >
-# cat >| foo #=> OK
-setopt NOCLOBBER
-
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local

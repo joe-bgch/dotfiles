@@ -4,6 +4,7 @@ if command_exists fasd ; then
 fi
 
 # fzf
+export FZF_TMUX=0
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # desk

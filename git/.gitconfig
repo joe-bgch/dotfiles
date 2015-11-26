@@ -13,6 +13,7 @@
     ci = commit
     br = branch -vv
     co = checkout
+    aa = add -A
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     cp = cherry-pick
     alias = config --get-regexp ^alias\.

@@ -16,6 +16,10 @@
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     cp = cherry-pick
     alias = config --get-regexp ^alias\.
+    # recursive git status -s
+    rs = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git status -s\"; echo; done }; f"
+    # recursive git status -sb
+    rsb = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git status -sb\"; echo; done }; f"
 
 [push]
     default = upstream

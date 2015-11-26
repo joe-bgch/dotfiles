@@ -17,6 +17,8 @@
     cp = cherry-pick
     alias = config --get-regexp ^alias\.
     hr = !echo --------------------------------------------------------------------------------
+    # undoable git reset --hard
+    wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
     # recursive git status -s
     rs = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git status -s\"; echo; done }; f"
     # recursive git status -sb

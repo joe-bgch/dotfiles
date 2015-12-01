@@ -191,3 +191,13 @@ function _tmpdir_on_exit {
 }
 
 trap _tmpdir_on_exit EXIT
+
+# find .git repositories recursively and pipe it into fzf
+function repos {
+    local dir=$(find . -name .git -type d | sed -e "s/\/.git//" | fzf)
+
+    if [[ -d ${dir} ]]
+    then
+        cd ${dir}
+    fi
+}

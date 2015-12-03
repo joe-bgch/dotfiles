@@ -40,7 +40,7 @@ function work_log {
 function fbr {
   local branches branch
   branches=$(git branch -a) &&
-  branch=$(echo "$branches" | fzf-tmux -d 15 +m) &&
+  branch=$(echo "$branches" | sed "s/.* //" | sed "s/remotes\/origin\///" | sort | uniq | fzf-tmux -d 15 +m) &&
   git checkout $(echo "$branch" | sed "s/.* //")
 }
 

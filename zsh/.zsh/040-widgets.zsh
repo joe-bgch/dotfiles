@@ -19,8 +19,8 @@ bindkey "^[s" insert-sudo
 
 # Alt+R to source .zshrc & .zshenv
 _source_zsh_config () {
-    [ -f $HOME/.zshrc ] && echo 'Sourcing ~/.zshrc' && source $HOME/.zshrc
     [ -f $HOME/.zshenv ] && echo 'Sourcing ~/.zshenv' && source $HOME/.zshenv
+    [ -f $HOME/.zshrc ] && echo 'Sourcing ~/.zshrc' && source $HOME/.zshrc
     zle && zle accept-line
 }
 

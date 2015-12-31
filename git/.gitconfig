@@ -26,6 +26,8 @@
     rsb = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git status -sb\"; echo; done }; f"
     # recursive git diff
     rdiff = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git status -sb && echo && git --no-pager diff $@\"; git hr; echo; done }; f"
+    # recursive git diff + git diff --cached
+    rdiffall = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git status -sb && echo && git --no-pager diff $@ && git --no-pager diff --cached $@\"; git hr; echo; done }; f"
     # recursive git log
     rlog = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git --no-pager lg -10 $@\"; echo; echo; done }; f"
 

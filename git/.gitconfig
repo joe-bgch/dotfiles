@@ -30,6 +30,10 @@
     rdiffall = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git status -sb && echo && git --no-pager diff $@ && git --no-pager diff --cached $@\"; git hr; echo; done }; f"
     # recursive git log
     rlog = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git --no-pager lg -10 $@\"; echo; echo; done }; f"
+    # recursive git fetch
+    rfetch = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git fetch\"; echo; echo; done }; f"
+    # recursive git branch search
+    rbs = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git branch -a | grep -i $@\"; echo; echo; done }; f"
 
 [push]
     default = upstream

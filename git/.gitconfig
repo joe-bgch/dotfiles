@@ -34,7 +34,8 @@
     rfetch = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git fetch\"; echo; echo; done }; f"
     # recursive git branch search
     rbs = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git branch -a | grep -i $@\"; echo; echo; done }; f"
-
+    # show the toplevel dir
+    path = rev-parse --show-toplevel
 [push]
     default = upstream
 

@@ -11,6 +11,7 @@ antigen bundle pip
 antigen bundle dirhistory
 antigen bundle micha/resty
 antigen bundle jamesob/desk shell_plugins/zsh
+antigen bundle Tarrasch/zsh-autoenv
 
 antigen theme ys
 

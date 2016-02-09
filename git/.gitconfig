@@ -9,6 +9,7 @@
     unpushed = "log --branches --not --remotes  --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset  %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit"
     ec = config --global -e
     contains = "!f() { echo 'Branches'; git branch --all --contains ${1-HEAD}; echo 'Tags'; git tag --contains ${1-HEAD}; }; f"
+    s = status
     st = status -sb
     ci = commit
     br = branch -vv
@@ -16,7 +17,7 @@
     aa = add -A
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     cp = cherry-pick
-    alias = config --get-regexp ^alias\.
+    alias = config --get-regexp ^alias\\.
     hr = !echo --------------------------------------------------------------------------------
     # undoable git reset --hard
     wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
@@ -36,8 +37,62 @@
     rbs = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git branch -a | grep -i $@\"; echo; echo; done }; f"
     # show the toplevel dir
     path = rev-parse --show-toplevel
+
+    # recursive git stash
+    rstash = "!f() { \
+        local STASHMSG=$(shuf -i 1000000-9999999 -n 1); \
+        find . -name '.git' -type d | while read dir ; do \
+            echo \"\\033[33;32m$dir\\033[0m\" | sed -e \"s/\\.git$//\" ; \
+            sh -c \"cd $dir/../ && git stash save -u $STASHMSG\"; \
+            echo; \
+            echo; \
+        done; \
+        echo \"Stash message $STASHMSG\"; \
+    }; f"
+
+    # recursive git stash search
+    rstashs = "!f() { \
+        if [ -z "$1" ]; then echo "Usage: git rstashs STASH-REF"; exit 1; fi; \
+        find . -name '.git' -type d | while read dir ; do \
+            sh -c \"cd $dir/../ && git --no-pager stash list | grep --colour -i $1 && echo \"$dir\" | sed -e \"s/\\.git$//\" && echo\"; \
+        done; \
+    }; f"
+
+    # recursive git stash list
+    rstashlist = "!f() { \
+        find . -name '.git' -type d | while read dir ; do \
+            WORKDIR=$(echo $dir | sed -e \"s/\\.git$//\"); \
+            if [ $(git -C $WORKDIR --no-pager stash list | wc -l) -ne 0 ]; then echo \"\\033[33;32m$WORKDIR\\033[0m\"; git -C $WORKDIR --no-pager stash list; echo; git hr; echo; fi; \
+        done; \
+    }; f"
+
+    # recursive git stash pop
+    rstashpop = "!f() { \
+        if [ -z "$1" ]; then echo "Usage: git rstashpop STASH-REF"; exit 1; fi; \
+        OLDDIR=$(pwd); \
+        find . -name '.git' -type d | while read dir ; do \
+            STASHREF=0; \
+            echo \"\\033[33;32m$dir\\033[0m\" | sed -e \"s/\\.git$//\" ; \
+            cd $dir/../; \
+            STASHREF=$(git --no-pager stash list | grep $1 | cut -d: -f1); \
+            if [ -z "$STASHREF" ]; then echo Stash not found && cd $OLDDIR && continue; fi; \
+            echo Stash found, popping it; \
+            git stash pop $STASHREF; \
+            echo; git hr; echo; \
+            cd $OLDDIR; \
+        done; \
+    }; f"
+
+    # recursive checkout
+    rcheckout = "!f() { \
+        find . -name '.git' -type d | while read dir ; do \
+            WORKDIR=$(echo $dir | sed -e \"s/\\.git$//\"); \
+            echo \"\\033[33;32m$WORKDIR\\033[0m\"; git -C $WORKDIR checkout $@; echo; git hr; echo; \
+        done; \
+    }; f"
+
 [push]
-    default = upstream
+    default = current
 
 [include]
     path = ~/.gitconfig.local

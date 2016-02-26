@@ -52,7 +52,7 @@ bindkey '^Q' fzf-kill
 
 # Alt+O to change to recent dir
 _fzf-change-to-recent-dir () {
-    dir=$(fasd -dlR | fzf -x)
+    dir=$(fasd -dlR | fzf -x -i --bind "alt-d:execute:(fasd -D {})")
 
     if [[ -d ${dir} ]]
     then
@@ -67,7 +67,7 @@ bindkey '^[o' fzf-change-to-recent-dir
 
 # Alt+E to edit recent file
 _fzf-edit-recent-file () {
-    file=$(fasd -fl | fzf -x)
+    file=$(fasd -flR | fzf -x)
     if [[ -f ${file} ]]
     then
         echo ${file} | xargs bash -c '</dev/tty vim "$@"' ignoreme

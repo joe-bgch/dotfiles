@@ -52,7 +52,7 @@ bindkey '^Q' fzf-kill
 
 # Alt+O to change to recent dir
 _fzf-change-to-recent-dir () {
-    dir=$(fasd -dlR | fzf -x -i --bind "alt-d:execute:(fasd -D {})")
+    dir=$(fasd -dlR | fzf -x -i --bind "ctrl-x:execute:(fasd -D {})")
 
     if [[ -d ${dir} ]]
     then

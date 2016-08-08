@@ -236,3 +236,30 @@ mvn-in-colors() {
 
   return $mvn_exit_code
 }
+
+catcmd () {
+    cat $(which $1)
+}
+
+review () {
+    feature_branch=$(git rev-parse --abbrev-ref HEAD)
+
+    # check if we are already on a review-* branch, if so, do nothing.
+    [[ ${feature_branch} =~ ^review- ]] && echo "Already on a review branch. Exiting." && return
+
+    git checkout master
+    git checkout -b review-${feature_branch}
+    git merge --squash ${feature_branch}
+}
+
+reviewdone () {
+    current_branch=$(git rev-parse --abbrev-ref HEAD)
+    branch=$(echo ${current_branch} | sed 's/^review-//')
+
+    # check if we are on a review-* branch, if not, do nothing.
+    [[ ! ${current_branch} =~ ^review- ]] && echo "Not on a review branch. Exiting." && return
+
+    git reset --hard
+    git checkout ${branch}
+    git branch -D ${current_branch}
+}

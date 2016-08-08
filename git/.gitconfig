@@ -37,6 +37,8 @@
     rbs = "!f() { find . -name '.git' -type d | while read dir ; do echo \"$dir\" | sed -e \"s/\\.git$//\"; sh -c \"cd $dir/../ && git branch -a | grep -i $@\"; echo; echo; done }; f"
     # show the toplevel dir
     path = rev-parse --show-toplevel
+    # print current branch
+    cb = rev-parse --abbrev-ref HEAD
 
     # recursive git stash
     rstash = "!f() { \
@@ -100,3 +102,11 @@
 [credential]
     # Use credential memory cache
     helper = cache --timeout=3600
+
+[git-up "rebase"]
+	log-hook = "echo \"changes on $1:\"; git --no-pager log --oneline --decorate $1..$2"
+
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true

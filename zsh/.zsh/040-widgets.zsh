@@ -1,6 +1,7 @@
 # Ctrl+L to cls
 function _cls {
     # contrary to clear this clears to the bottom of the screen
+    zle && zle backward-kill-line && zle kill-line
     printf '\n%.0s' {1..80}
     zle && zle accept-line
 }
@@ -52,7 +53,7 @@ bindkey '^Q' fzf-kill
 
 # Alt+O to change to recent dir
 _fzf-change-to-recent-dir () {
-    dir=$(fasd -dlR | fzf -x -i --bind "ctrl-x:execute:(fasd -D {})")
+    dir=$(fasd -dlR | fzf -x -e -i --bind "ctrl-x:execute:(fasd -D {})")
 
     if [[ -d ${dir} ]]
     then

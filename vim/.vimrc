@@ -10,13 +10,12 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'joonty/vdebug'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'ColorSchemeMenuMaker'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'sh.vim'
-Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'airblade/vim-gitgutter'
 
@@ -29,7 +28,7 @@ filetype plugin indent on
 set t_Co=256
 
 " Set colorscheme
-colorscheme elda
+colorscheme darcula
 
 " Highlight current line
 set cursorline
@@ -97,19 +96,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 set laststatus=2
 let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts = 1
-
-" Syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" Tagbar
-nmap <F8> :TagbarToggle<CR>
 
 " CtrlP
 nmap <leader>b :CtrlPBuffer<CR>

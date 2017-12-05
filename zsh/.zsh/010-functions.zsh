@@ -37,11 +37,12 @@ function work_log {
 
 # fbr - checkout git branch
 # http://junegunn.kr/2015/03/fzf-tmux/
-function fbr {
+function fbr() {
   local branches branch
-  branches=$(git branch -a) &&
-  branch=$(echo "$branches" | sed "s/.* //" | sed "s/remotes\/origin\///" | sort | uniq | fzf-tmux -d 15 +m) &&
-  git checkout $(echo "$branch" | sed "s/.* //")
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
 # ftag - checkout git tag
@@ -50,6 +51,20 @@ function ftag {
   tags=$(git tag) &&
   tag=$(echo "$tags" | fzf-tmux -d 15 +m) &&
   git checkout $(echo "$tag")
+}
+
+function fco() {
+  local tags branches target
+  tags=$(
+    git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
+  branches=$(
+    git branch --all | grep -v HEAD             |
+    sed "s/.* //"    | sed "s#remotes/[^/]*/##" |
+    sort -u          | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+  target=$(
+    (echo "$tags"; echo "$branches") |
+    fzf-tmux -l60 -- --no-hscroll --ansi +m -d "\t" -n 2) || return
+  git checkout $(echo "$target" | awk '{print $2}')
 }
 
 # http://unix.stackexchange.com/questions/9123/is-there-a-one-liner-that-allows-me-to-create-a-directory-and-move-into-it-at-th
@@ -159,6 +174,21 @@ bd () {
          return 1
        fi
   esac
+}
+
+# fdr - cd to selected parent directory
+fdr() {
+  local declare dirs=()
+  get_parent_dirs() {
+    if [[ -d "${1}" ]]; then dirs+=("$1"); else return; fi
+    if [[ "${1}" == '/' ]]; then
+      for _dir in "${dirs[@]}"; do echo $_dir; done
+    else
+      get_parent_dirs $(dirname "$1")
+    fi
+  }
+  local DIR=$(get_parent_dirs $(realpath "${1:-$(pwd)}") | fzf-tmux --tac)
+  cd "$DIR"
 }
 
 # Fix SSH agent in reattached tmux session shells

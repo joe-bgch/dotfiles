@@ -19,6 +19,8 @@
     cp = cherry-pick
     alias = config --get-regexp ^alias\\.
     hr = !echo --------------------------------------------------------------------------------
+    # short log with tags
+    logtags = log --no-walk --tags --pretty='%h %d %s' --decorate=full
     # undoable git reset --hard
     wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard
     # recursive git status -s

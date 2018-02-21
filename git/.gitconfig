@@ -2,13 +2,16 @@
     excludesfile = ~/.gitignore_global
     editor = vim
 
+[user]
+    name = "David Bagonyi"
+
 [color]
     ui = true
 
 [alias]
     unpushed = "log --branches --not --remotes  --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset  %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit"
     ec = config --global -e
-    contains = "!f() { echo 'Branches'; git branch --all --contains ${1-HEAD}; echo 'Tags'; git tag --contains ${1-HEAD}; }; f"
+    contains = "!f() { echo 'Branches'; git --no-pager branch --all --contains ${1-HEAD}; echo 'Tags'; git --no-pager tag --contains ${1-HEAD}; }; f"
     s = status
     st = status -sb
     ci = commit

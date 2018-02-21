@@ -293,3 +293,7 @@ reviewdone () {
     git checkout ${branch}
     git branch -D ${current_branch}
 }
+
+ws () {
+    open -n -a "Wireshark" "$@"
+}

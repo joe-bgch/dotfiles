@@ -24,6 +24,9 @@ filetype plugin indent on
 
 " General settings
 
+" Set encoding
+set encoding=utf-8
+
 " Enable 256 colors
 set t_Co=256
 

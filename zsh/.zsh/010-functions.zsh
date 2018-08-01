@@ -272,26 +272,32 @@ catcmd () {
 }
 
 review () {
-    feature_branch=$(git rev-parse --abbrev-ref HEAD)
+    BASE_BRANCH=${1:-master}
+    CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+    echo "Current branch: ${CURRENT_BRANCH}"
+    echo "Base branch: ${BASE_BRANCH}"
 
     # check if we are already on a review-* branch, if so, do nothing.
-    [[ ${feature_branch} =~ ^review- ]] && echo "Already on a review branch. Exiting." && return
+    [[ ${CURRENT_BRANCH} =~ ^review- ]] && echo "Already on a review branch. Exiting." && return
 
-    git checkout master
-    git checkout -b review-${feature_branch}
-    git merge --squash ${feature_branch}
+    git checkout ${BASE_BRANCH}
+    git checkout -b review-${CURRENT_BRANCH}
+    git merge --squash ${CURRENT_BRANCH}
 }
 
 reviewdone () {
-    current_branch=$(git rev-parse --abbrev-ref HEAD)
-    branch=$(echo ${current_branch} | sed 's/^review-//')
+    CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
     # check if we are on a review-* branch, if not, do nothing.
-    [[ ! ${current_branch} =~ ^review- ]] && echo "Not on a review branch. Exiting." && return
+    [[ ! ${CURRENT_BRANCH} =~ ^review- ]] && echo "Not on a review branch. Exiting." && return
 
     git reset --hard
-    git checkout ${branch}
-    git branch -D ${current_branch}
+
+    ORIGINAL_BRANCH=$(echo ${CURRENT_BRANCH} | sed 's/^review-//')
+    git checkout ${ORIGINAL_BRANCH}
+
+    git branch -D ${CURRENT_BRANCH}
 }
 
 ws () {

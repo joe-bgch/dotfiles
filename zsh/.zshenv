@@ -35,4 +35,7 @@ zstyle ':completion:*' matcher-list '' \
 # Do not try to execute lines starting with #
 setopt interactivecomments
 
+# cd to dirs without using cd command
+setopt auto_cd
+
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local

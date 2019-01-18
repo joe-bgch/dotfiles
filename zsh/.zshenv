@@ -23,6 +23,10 @@ bindkey -M menuselect '\e' send-break
 # Make delete key (Fn + backspace) work
 bindkey "\e[3~" delete-char
 
+# Make Ctrl + Left / Right work
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
 # Show menu on tab tab
 zstyle ':completion:*' menu select
 

@@ -1,8 +1,7 @@
 export EDITOR=vim
 export VISUAL=vim
 
-# Display last exit code on the right
-export RPROMPT='[%?]'
+export RPROMPT=''
 
 WORDCHARS=${WORDCHARS//[=&.;]}
 

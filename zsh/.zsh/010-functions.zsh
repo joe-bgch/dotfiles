@@ -303,3 +303,7 @@ reviewdone () {
 ws () {
     open -n -a "Wireshark" "$@"
 }
+
+function cs () {
+    curl cht.sh/$1
+}
